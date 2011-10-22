@@ -11,7 +11,9 @@ Requirements
 Usage
 --------------
 
-```$ fetchFeeds.py <feed url> [directory-to-store-feeds]```
+```bash
+$fetchFeeds.py [-h] --feed FEEDURL [--info] [--prefix PREFIX] [--quiet]
+```
 
 Output
 -------------
