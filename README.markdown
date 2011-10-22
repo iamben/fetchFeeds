@@ -12,7 +12,7 @@ Usage
 --------------
 
 ```bash
-$fetchFeeds.py [-h] --feed FEEDURL [--info] [--prefix PREFIX] [--quiet]
+$ fetchFeeds.py [-h] --feed FEEDURL [--info] [--prefix PREFIX] [--quiet]
 ```
 
 Output
