@@ -15,7 +15,7 @@ Usage
 Output
 -------------
 
-The feeds would be stored in [directory-to-store-feeds] (cwd if no sepcified)
+The feeds would be stored in \[directory-to-store-feeds\] (cwd if no sepcified)
 with the file name to be the timestamp of the feed.
 
 The html tag in original feed would be striped using [html2text][1].
