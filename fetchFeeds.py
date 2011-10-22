@@ -25,12 +25,17 @@ for entry in feed['entries']:
     # use timestamp + title md5 as file name
     fileName = str(int(time.mktime(entry['date_parsed'])))
     fileName += '.' + md5(entry['title'].encode('utf-8')).hexdigest()[0:5]
+    fileName = os.path.join(prefix, fileName)
 
-    with open(os.path.join(prefix, fileName), 'wb') as entFile:
+    if os.path.exists(fileName):
+        print "Skipping existing feed: %s" % entry['title'].encode('utf-8')
+        continue
+
+    with open(fileName, 'wb') as entFile:
         # markdown-like header
         entFile.write('---\nTitle: %s\n---\n' % entry['title'].encode('utf-8'))
 
         # stripe html tags
         entFile.write(html2text.html2text(entry['summary'], '').encode('utf-8'))
 
-        print '%s fetched.' % entry['title'].encode('utf-8')
+        print 'Fetched feed: %s' % entry['title'].encode('utf-8')
