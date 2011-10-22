@@ -4,6 +4,7 @@ fetchFeeds.py: simple script to fetch RSS feeds into file
 Requirements
 ----------------
 
+- Python 2.7+
 - [html2text][1]: textproc/py-html2text in FreeBSD ports.
 - [feedparser][2]: textproc/py-feedparser in FreeBSD ports.
 
