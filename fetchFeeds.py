@@ -4,6 +4,7 @@
 import feedparser   # textproc/py-feedparser
 import html2text    # textproc/py-html2text
 import sys, time, os
+from hashlib import md5
 
 if len(sys.argv) not in range(2, 4):
     sys.stderr.write('Usage: fetchFeeds.py <feed url> [directory-to-store-feeds]\n')
@@ -17,14 +18,15 @@ else:
     try:
         os.makedirs(prefix, 0755)
     except:
-        print "Can't create directory: %s" % prefix
-        sys.exit(2)
+        print "Using existing directory: %s" % prefix
 
 # retrive feeds
 for entry in feed['entries']:
-    # use timestamp as file name
-    with open(os.path.join(prefix,
-                str(int(time.mktime(entry['date_parsed'])))), 'wb') as entFile:
+    # use timestamp + title md5 as file name
+    fileName = str(int(time.mktime(entry['date_parsed'])))
+    fileName += '.' + md5(entry['title'].encode('utf-8')).hexdigest()[0:5]
+
+    with open(os.path.join(prefix, fileName), 'wb') as entFile:
         # markdown-like header
         entFile.write('---\nTitle: %s\n---\n' % entry['title'].encode('utf-8'))
 
