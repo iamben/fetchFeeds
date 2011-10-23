@@ -52,13 +52,10 @@ args = argParser.parse_args()
 
 # info from options
 feed = feedparser.parse(args.feedurl)
+quiet = args.quiet
+prefix=''
 
-if args.quiet is not None:
-    quiet = args.quiet
-else:
-    quiet = False
-
-if args.info is not None:
+if args.info is True:
     getFeedInfo(feed, quiet=False)
     sys.exit(0)
 
@@ -69,5 +66,5 @@ if args.prefix is not None:
     except:
         msgPrint("Using existing directory: %s" % prefix, quiet)
 
-if args.info is None:
+if args.info is False:
     getFeedContent(feed, prefix=prefix, quiet=quiet)
