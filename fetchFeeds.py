@@ -28,7 +28,9 @@ def getFeedContent(feed, prefix='', quiet=True):
 
         with open(fileName, 'wb') as entFile:
             # markdown-like header
-            entFile.write('---\nTitle: %s\n---\n' % entry['title'].encode('utf-8'))
+            entFile.write('---\nTitle: %s\nLink: %s\n---\n' %
+                    (entry['title'].encode('utf-8'),
+                     entry['link'].encode('utf-8')))
 
             # stripe html tags
             entFile.write(html2text.html2text(entry['summary'], '').encode('utf-8'))
