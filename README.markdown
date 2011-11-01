@@ -35,6 +35,7 @@ $ fetchFeeds.py [-h] --feed FEEDURL [--info] [--prefix PREFIX] [--quiet] [--raw]
     Quiet mode, no progress message is printed
 
 *   __-r, --raw__
+
     Raw mode, HTML tags is preserved.
 
 Output
