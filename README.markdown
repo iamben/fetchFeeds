@@ -14,22 +14,27 @@ Usage
 ```bash
 $ fetchFeeds.py [-h] --feed FEEDURL [--info] [--prefix PREFIX] [--quiet] [--raw]
 ```
-*   _-h_
+*   __-h__
+
     Show help message
 
-*   _-f, --feed_
+*   __-f, --feed__
+
     Feed URL, required
 
-*   _-i, --info_
+*   __-i, --info__
+
     Only show feed info (title, URL)
 
-*   _-p, --prefix_
+*   __-p, --prefix__
+
     Prefix of feed storage path
 
-*   _-q, --quiet_
+*   __-q, --quiet__
+
     Quiet mode, no progress message is printed
 
-*   _-r, --raw_
+*   __-r, --raw__
     Raw mode, HTML tags is preserved.
 
 Output
