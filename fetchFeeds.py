@@ -13,7 +13,7 @@ def msgPrint(msg, quiet=False):
         print msg
 
 
-def getFeedContent(feed, prefix='', quiet=True):
+def getFeedContent(feed, prefix='', raw=False, quiet=True):
     # retrive feeds
     for entry in feed['entries']:
         # use timestamp + title md5 as file name
@@ -32,8 +32,11 @@ def getFeedContent(feed, prefix='', quiet=True):
                     (entry['title'].encode('utf-8'),
                      entry['link'].encode('utf-8')))
 
-            # stripe html tags
-            entFile.write(html2text.html2text(entry['summary'], '').encode('utf-8'))
+            if raw is True:
+                entFile.write(entry['summary'].encode('utf-8'))
+            else:
+                # stripe html tags
+                entFile.write(html2text.html2text(entry['summary'], '').encode('utf-8'))
 
             msgPrint('Fetched feed: %s' % entry['title'].encode('utf-8'), quiet)
 
@@ -50,11 +53,11 @@ argParser.add_argument('-i', '--info', help='Fetch feed info only', action='stor
 argParser.add_argument('-p', '--prefix', help='Path prefix of file storing')
 argParser.add_argument('-q', '--quiet', help='Suppress message output',
         action='store_true')
+argParser.add_argument('-r', '--raw', help='Preserve html tags', action='store_true')
 args = argParser.parse_args()
 
 # info from options
 feed = feedparser.parse(args.feedurl)
-quiet = args.quiet
 prefix=''
 
 if args.info is True:
@@ -66,7 +69,7 @@ if args.prefix is not None:
     try:
         os.makedirs(prefix, 0755)
     except:
-        msgPrint("Using existing directory: %s" % prefix, quiet)
+        msgPrint("Using existing directory: %s" % prefix, args.quiet)
 
 if args.info is False:
-    getFeedContent(feed, prefix=prefix, quiet=quiet)
+    getFeedContent(feed, prefix=prefix, raw=args.raw, quiet=args.quiet)
